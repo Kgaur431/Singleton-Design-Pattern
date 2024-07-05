@@ -1,0 +1,20 @@
+        Properties to be a Singleton  ==> at max Only one object  created.
+Ques1:- If a Class has a public constructor, Can that class ever be Singleton ?
+Ans    :-  No,  becoz Constructor will always create a new obj means constructor can never return an old obj.  (if the class is public then we can create as many obj as we want).
+
+Use case:- we want to make my db class as singleton class.                      we understood that if we have public constructor than we can't make a class as singleton class. so we did like this:-
+    Class Database {
+        private Database(){...}  }              // if we use private constructor then we can't create any obj.
+
+Sol:-
+       Class Database {                                             // just to remember, Private things are accessible within the class.
+       private static Database instance = null;                //  in this attribute, only one obj of database class has been stored.
+       private Database(){...}                                   // we make private constructor becoz we don't want that other class directly call the constructor, so that they can't create multiple obj.
+       public static Database getInstance()        // this method will used by other class to create the instance of this class.
+            {                                                                  // before creating an obj we have to check if an obj of this class has already been created or not.
+                if( instance == null) {
+                    instance = new Database(); }        // creating new instance.
+               return instance;                                  // if not null then returning old instance.
+            }
+       }                                                                     // we have to make this class as static otherwise how we will call this getInstance() in other classes.        also this method is an static method so we have to make instance variable static.
+
