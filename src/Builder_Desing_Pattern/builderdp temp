@@ -1,0 +1,85 @@
+Now the UserExamBuilder Class will do these three things, to create an obj of UserExam class.
+Task0:- What are the attributes of the UserExam class                                                        ==>     Parameters class already know about it.
+Task1:- How will we validate the attributes                                                                             ==> Need to figure it out.
+Task2:- How will UserExamBuilder class create an object of the UserExam class         ==> Need to figure it out.
+
+In UserExam class we have to create the private constructor so that apart from UserExamBuilder class no other class create the obj of UserExam class.       ==>     must Remember
+
+for sol5:-
+    UserExam Class is immutable.    so we are using UserExamBuilder class to create the obj for UserExam class.
+    Task1:- figuring it out.
+        When is the best time to validate the parameters    ==>     Before creating the obj, So for that UserExamBuilder class should have some static method which will validate the attributes before creating the obj.        **
+    Task2:- figuring it out.
+        If UserExamBuilder class able to access the private attributes of the UserExam class then it can create the obj of UserExam class.
+        How it will access them        ==>     "Private attributes are accessible in the class itself" so "instead of making separate UserExamBuilder class we will make it inner class of UserExam class so that it can access the private attributes.
+
+    UserExamBuilder class has method called build(), to create the obj of UserExam Class.
+    But How we create the UserExamBuilder class obj     ==>     so, In the UserExam class we create static getBuilder() which will return the obj of UserExamBuilder class.  for that we have to make UserExamBuilder class as static.
+    How Main Class knows about that there is any UserExamBuilder class present   ==> above ans.
+        "To create the obj of UserExamBuilder, first we have to create the obj of UserExam class. & UserExam obj will create by UserExamBuilder class".              ==> this is one of the design problem.
+
+Method Chaining:-
+    Eg:-    To create the Method Chaining.
+                assume, somehow setEnglish() will return the UserExamBuilder obj, by using that setMaths() called & now setMaths() will also return the UserExamBuilder obj by using that build() called and so on.
+                we were doing this,     userExamBuilder.setEnglish(10);     userExamBuilder.setMaths(10);   userExamBuilder.build(); etc.  ' but if we somehow able to return the UserExamBuilder obj from these setter methods then we can do Method Chaining.
+                How to do this ?
+                setMaths() is an method of which class  ==>     UserExamBuilder.        other set methods are from UserExamBuilder class.
+                 to do the method chaining , we have to change the return type of all the setter methods.  Now What should be the return type of setMaths()    ==>     UserExamBuilder, then only we can chain the methods.
+
+                    void setMaths(int maths) {                                        ==>                                                    UserExamBuilder setMaths(int maths) {
+                        this.maths = maths;                                                                                                                 this.maths = maths;
+                                                                                                                                                                             return this;                   // means returning the current obj.
+                        }                                                                                                                                                   }
+                    Eg:-
+                            UserExam userExam1=
+                                    UserExam.getUserExamBuilder()                               // our motive is to create the UserExamBuilder obj & then call the respective methods.
+                                            .setEnglish(10)
+                                            .setMaths(20)
+                                            .setScience(40)
+                                            .setName("Manan")
+                                            .build();
+                    Working:-
+                                first getUserExamBuilder() will return the obj of UserExamBuilder {like obj1},
+                                by using that obj it call setEnglish(10)  {like obj1.setEnglish(10)}. Now it will return the current obj which is obj1 only.
+                                by using that obj it call setMaths(20)    {like obj1.setMaths(20)}.    Now it will return the current obj which is obj1 only.
+                                by using that obj it call setScience(40) {like obj1.setScience(40)}. Now it will return the current obj which is obj1 only.
+                                by using that obj it call setName("Manan") {like obj1setName("Manan")}. Now it will return the current obj which is obj1 only.
+                                by using that it call the build() & it will return the obj of UserExam Class. which is store by userExam1.
+
+                    When we are creating an obj & then calling multiple methods of same type then we can use Method Chaining.
+
+
+
+Builder Class look like:-
+        Class Parent {
+            private attribute1                      // private attributes.                                                                                                      step1
+            private attribute2
+            private attribute3
+
+            private Parent() {}                     // other class can't create the obj directly.                                                               step2
+            public static Builder getBuilder() {}                                                                                                                                step6
+
+            public static Class Builder {
+                private attribute1                      // variables are exact same as parent class.                                                         step3
+                private attribute2
+                private attribute3
+
+                public Builder setter_methods() {}                                                                                                                              step4
+
+                Parent build()  {}                                                                                                                                                              step5
+            }
+        }
+
+ No setter methods are present in Parent class becoz it is immutable.
+
+
+
+
+
+
+
+
+
+
+
+

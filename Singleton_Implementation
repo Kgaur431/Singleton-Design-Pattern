@@ -6,6 +6,7 @@ Use case:- we want to make my db class as singleton class.                      
     Class Database {
         private Database(){...}  }              // if we use private constructor then we can't create any obj.
 
+first implementation:-
 Sol:-
        Class Database {                                             // just to remember, Private things are accessible within the class.
        private static Database instance = null;                //  in this attribute, only one obj of database class has been stored.
