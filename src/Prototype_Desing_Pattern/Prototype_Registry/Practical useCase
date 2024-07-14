@@ -1,0 +1,33 @@
+In classmate Notebook, something interested in the classNotebook that is 'facts' written in the last page.
+Structure of Classmate notebook is:-
+      Cover page      ==>       multiple pages      ==>       facts page
+useCase:-
+            assume we are working in a ClassmateNotebookFactory & our task is to write a s/w for them, to create a multiple classmate notebooks. Classmate notebooks has multiple types of notebooks.
+            How we can represent the Notebook as a Class ?
+                   Notebook {
+                        no.of.pages    ==>     180/220/240 etc.
+                        pagesize         ==>     A4/A5 etc.
+                        coverPage
+                        factsPage
+                        type                  ==>     ruled/unruled.
+                        price
+                   }
+           Now for all the A4 size, 180 pages, ruled type classmate notebook has same price.        assume it is 40 rs.
+                only the coverPage & factsPage is different.
+
+          Think:-   We can create a NotebookRegistry, the first type of notebook is probably (A4,180,ruled)                                ==>         new Notebook (A4,180,ruled, 40, null, null);             // coverpage & factspage is null.
+                           We have another notebook in the NotebookRegistry, the type of notebook is probably (A4,220,ruled)        ==>         new Notebook (A4,220,ruled, 80, null, null);
+                           We have another notebook in the NotebookRegistry, the type of notebook is probably (A5,240,unruled)    ==>         new Notebook (A5,240,unruled, 80, null, null);
+
+         These are the notebook objects, it has already stored in the NotebookRegistry class.         Now we have to create 100 notebooks of type (A4,180,ruled),  50 notebooks of type (A4,220,ruled),  100 notebooks of type (A5,240,unruled).
+         How we will do this smartly?
+                "We get the copy of the Notebook from the NotebookRegistry of the given type & then set the cover page & front page".
+
+                for(i=1; i<=100; i++){
+                    Notebook notebook = notebookRegistry.getNotebook(A5,240,unruled);
+                    notebook.setCoverPage = "something";
+                    notebook.setFactsPage = "something";
+               }
+
+        Actual use case:-
+                        means we saved the Prototype / Templates / base objects in the registry then we get the objects from there & do some modification of those objects & return it.

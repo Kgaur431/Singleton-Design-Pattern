@@ -1,0 +1,103 @@
+Sol1:-          Manually Copying, one by one.
+    Class Main{
+        psvm{
+            Bird original = new Bird();
+            Bird copy = new Bird();
+                copy.color = original.color;
+                copy.age = original.age;
+                copy.type = original.type;
+                copy.weight = original.weight;
+        }
+    }
+
+Sol2:-
+    BirdSanctuary{                  // Main class
+        List<Bird>  reproduce (List<Bird> parents)
+        {
+            List<Bird> children;
+            for(Bird parent : parents)                  // parent can be represent to Pigeon, Penguin etc.
+            {
+                    if(parent.type == Pigeon){  ....}
+                    if(parent.type == Penguin){  ....}
+                    if(parent.type == Sparrow){  ....}
+            }
+        }
+    }
+
+Sol3:-  Now every type of bird implements copy().
+    abstract Class Bird {
+            ....
+            abstract Bird copy();       // not sure about return_type.
+    }
+
+    Class Pigeon extends Bird{                              Class Penguin extends Bird{                           Class Sparrow extends Bird{
+        Pigeon copy {                                                       Penguin copy {                                                   Sparrow copy {
+            .....                                                                           .....                                                                      .....
+        }                                                                               }                                                                            }
+    }                                                                               }                                                                             }
+
+    Now, every child class know how to create a copy of itself. becoz every child class has all the information about his class.
+
+    BirdSanctuary class look like:-
+         Class BirdSanctuary{                           // Main class
+                    List<Bird>  reproduce (List<Bird> parents)          // create the copy of every bird.
+                    {
+                        List<Bird> children;
+                        for(Bird parent : parents)
+                        {
+                                children.add(parent.copy());        // Now, we have removed the responsibility of copy from the BirdSanctuary class.
+                        }
+                        return children;
+                    }
+            }
+
+    Now, Bird class is not responsible for to create the copy of every bird.
+        means SPR is resolved,
+                    when we add new bird (children.add(...)) then we don't have to change anything in the BirdSanctuary Class. so Open/Close is also resolved.
+
+
+New Scenario:-
+
+    Class Bird_Registry {
+        private Map<String, Bird> birds;            // Naming the every bird object.    Like pigeon --> Pigeon, penguin --> Penguin etc.
+
+        public addBird (String name, Bird bird)
+        {
+            birds.put(name, bird);
+        }
+
+        public Bird getBird(String name){
+            return birds.getName(name).copy();      // Registry class never return the original bird that it has store.
+        }
+    }
+
+    Class Main {
+        Bird_Registry br = new Bird_Registry();
+        br.addBird("normal pigeon", new Pigeon();
+        br.addBird("normal penguin", new Penguin();
+        Penguin intelligent_Penguin = new Penguin();
+            intelligent_Penguin.weight =20;
+            intelligent_Penguin.brain=true;
+        br.addBird("intelligent_Penguin",intelligent_Penguin);
+
+        createNewBird(String type){
+            return br.getBird(type);
+        }
+
+    }
+
+Conclusion:-
+    interface Cloneable {
+        Clone();
+    }
+
+    abstract Class Bird {                               ||                   Class Bird {
+        abstract clone();                                                           clone() {   #implementation of clone method; }
+    }                                                                                       }
+
+    if the clone() is abstract then child class should implement this method.
+    Class Pigeon extends Bird{                              Class Penguin extends Bird{                           Class Sparrow extends Bird{
+        Pigeon clone {                                                       Penguin clone {                                                   Sparrow clone {
+            .....                                                                           .....                                                                      .....
+        }                                                                               }                                                                            }
+    }                                                                               }                                                                             }
