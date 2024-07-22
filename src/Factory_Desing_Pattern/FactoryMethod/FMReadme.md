@@ -1,0 +1,1 @@
+Factory methods we don't have any implementation, so just read the scaler implementation.  
