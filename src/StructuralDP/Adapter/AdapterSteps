@@ -1,0 +1,18 @@
+1.  we create the flipkart class.
+2.  we create the interface which has 2 methods.         //   let say, flipkart class needs 2 services. so where we put those services? we put those services in the interface.
+3.  we create the ENUM called PaymentStatus.
+4.  we create the makePaymentViaCC() in the Flipkart class.    //   Flipkart class might have method called makePaymentViaCC()
+5.  Flipkart class has private variable called  PaymentGateway.
+6.  we create the constructor in the Flipkart class to initialize the PaymentGateway.
+7.  we created the new package called RazorPay.
+        7.1     we create the RazorPayGateway class.
+        7.2     we create the method called payByCreditCard(String creditCard, String cvv, String expiryDate) in the RazorPayGateway class.
+        7.3     we create the method called checkPaymentStatus(String transactionID) in the RazorPayGateway class.
+8.  we created the new package called PayUMoney.
+        8.1 we create the PayUMoneyGateway class.
+Ideally Flipkart codebase should depend upon the interface (PaymentGatewayService) and not on the concrete implementation (RazorPayGateway or PayUMoneyGateway). This is the Dependency Inversion Principle.
+    will the RazorPayGateway class and PayUMoneyGateway class implement the PaymentGatewayService interface?  No.
+9. we only implements PaymentGatewayService interface by using Adapter class in the Flipkart codebase. like below.
+        9.1 we create the RazorPayGatewayAdapter class. it will implement the PaymentGatewayService interface which we created in the step 2.
+        9.2 we create the PayUMoneyGatewayAdapter class. it will implement the PaymentGatewayService interface which we created in the step 2.
+10.  we create the main class called FlipkartMain.
