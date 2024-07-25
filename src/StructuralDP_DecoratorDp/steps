@@ -1,0 +1,24 @@
+first we create the Ice cream package.      now what is the thing we want to make in the Ice cream ?        ==>     Icecream
+    1.  we create the Icecream interface.           (for an Icecream cone what are the methods that we are interested in ?)
+          1.1 we create the methods called getCost() and getConstituents() in the Icecream interface.       (to create the Icecream cone what is base entity we need ==>  Cone, but the Cone is of different types like OrangeCone, BlueCone etc.)
+   2.   we create the OrangeCone class which implements the Icecream interface.       (OrangeCone is a type of Icecream cone)       both of them are base entities.
+   3.   we create the BlueCone class which implements the Icecream interface.       (BlueCone is a type of Icecream cone)
+   4.   we create the VanillaIScope class which implements the Icecream interface.       (after adding the VanillaIScope, it still remains the Icecream cone)
+            4.1 we create the constructor of the VanillaIScope class.       (to create the VanillaIScope, we need the Icecream cone)
+  5.    we create the ChocolateIScope class which implements the Icecream interface.       (after adding the ChocolateIScope, it still remains the Icecream cone)
+            5.1 we create the constructor of the ChocolateIScope class.       (to create the ChocolateIScope, we need the Icecream cone)
+  6.    we create the Customer class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note:-  "for the Base entity(OrangeCone, BlueCone) we are not creating the constructor. but for the decorated entity (VanillaIScope, ChocolateIScope), we are creating the constructor."
