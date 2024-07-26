@@ -1,0 +1,20 @@
+1.  we create the BeforeFlyweight package.
+      1.1   we create the Bullet class.
+      1.2   we create the BulletType class that is Enum.
+      1.3   we create the BulletStatus class.
+      1.4   we define the attributes of the Bullet class.
+2.  we create the Main class.
+      2.1   we create the 2,00,000 bullets object   (2000 * 100)   and store them in the bullets list.
+
+ // we might end up with huge amount of memory consumption. so we use Flyweight pattern.
+
+3. we create the AfterFlyweight package.
+    3.1 we copied the Bullet class, BulletType class, BulletStatus class & Main class from BeforeFlyweight package.
+    3.2 we create the BulletExtrinsic class.  & shift the attributes of Bullet class to BulletExtrinsic class which are of type Extrinsic.
+    3.3 we modify the Bullet class to have the attributes of type Intrinsic.
+    3.4 we add the reference of BulletExtrinsic class in Bullet class.                              **read the comment read1 in Main class**
+4.  we create the BulletRegistry class.     // the purpose of this class is to store the bullet objects & allow us to retrieve them when needed.
+     4.1     we create the Map.
+     4.2     we create the getBullet method.
+     4.3     we create the registerBullet method.
+5.  we create the flyingbullet objects.     // flyingbullet is nothing but an BulletExtrinsic.
